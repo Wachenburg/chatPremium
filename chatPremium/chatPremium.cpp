@@ -1,81 +1,76 @@
 // chatPremium.cpp : Este arquivo contém a função 'main'. A execução do programa começa e termina ali.
 //
 
-#include <iostream>
-#include <string>
+#include"Libs.h"
+#include "Usuario.h";
 using namespace std;
 
-class Usuario {
-private:
-    string nome = "braia";
-    string senha = "braia";
-public:
-    string getnome() {
-        return nome;
-    }
-    string getsenha() {
-        return senha;
-    }
-
-};
-int main() {
+int main(){
     string nomegrupo, mensagem, nomecontato;
     int op, tipo, qntdcontato;
     string nome, senha;
-    Usuario Usuario;
+    Usuario Usuario ("teste", "teste");
     cout << "digite seu nome\n";
     cin >> nome;
     cout << "digite sua senha\n";
     cin >> senha;
-    if (Usuario.getnome() == nome && Usuario.getsenha() == senha) {
-        do {
+    if (Usuario.getNome() == nome && Usuario.getSenha() == senha) {
+        do{
             cin >> op;
             switch (op) {
-            case 1: {
-                cout << "Qual o contato/grupo que você vai enviar a mensagem\n";
-                cin >> nomegrupo;
-                cout << "digite a mensagem a ser enviada\n";
-                getline(cin, mensagem);
-                cin.clear();
-                cin.ignore();
-            }
-            case 2: {
-                //fazer um "do while" para listar todos os grupos que o usuario logado
-            }
-            case 3: {
-                do {
-                    cout << "Selecione o tipo de grupo, 1 para grupo simples e 2 para grupo com varias pessoas\n";
-                    cin >> tipo;
-                } while (tipo != 1 || tipo != 2);
-                if (tipo == 1) {
-                    cout << "digite o nome do contato\n";
-                    cin >> nomecontato;
-                }if (tipo == 2) {
-                    cout << "digite o nome do grupo\n";
+                case 1: {
+                    cout << "Qual o contato/grupo que você vai enviar a mensagem\n";
                     cin >> nomegrupo;
-                    cout << "digite quantos contatos deseja adicionar\n";
-                    cin >> qntdcontato;
-                    for (int i = 0; i < qntdcontato; i++) {
-                        cout << "digite o contato\n";
+                    cout << "digite a mensagem a ser enviada\n";
+                    getline(cin, mensagem);
+                    cin.clear();
+                    cin.ignore();
+                    break;
+                }
+                case 2: {
+                    //fazer um "do while" para listar todos os grupos que o usuario logado
+                    break;
+                }
+                case 3: {
+                    do {
+                        cout << "Selecione o tipo de grupo, 1 para grupo simples e 2 para grupo com varias pessoas\n";
+                        cin >> tipo;
+                    } while (tipo != 1 && tipo != 2);
+                    if (tipo == 1) {
+                        cout << "digite o nome do contato\n";
                         cin >> nomecontato;
-                        //chamado para o banco
+                    }if (tipo == 2) {
+                        cout << "digite o nome do grupo\n";
+                        cin >> nomegrupo;
+                        cout << "digite quantos contatos deseja adicionar\n";
+                        cin >> qntdcontato;
+                        for (int i = 0; i < qntdcontato; i++) {
+                            cout << "digite o contato\n";
+                            cin >> nomecontato;
+                            //chamado para o banco
+                        }
                     }
+                    break;
+                }
+                case 4: {
+                    break;
+                }
+                case 5: {
+                    break;
+                }
+                case 6: {
+                    break;
+                }
+                case 7: {
+                    break;
+                }
+                default: {
+                    break;
                 }
             }
-            case 4: {
-            }
-            case 5: {
-            }
-            case 6: {
-            }
-            case 7: {
-            }
-            default: {
-            }
-            }
-        } while (op != 7);
+        }while(op != 7);
     }
-
+    
 }
 
 // Executar programa: Ctrl + F5 ou Menu Depurar > Iniciar Sem Depuração
