@@ -1,27 +1,23 @@
 #pragma once
-#include"Libs.h"
-using namespace std;
+#include"Libs.cpp"
+
 class Usuario {
 private:
-    string nome;
+    int id;
+    string nomeUsuario;
     string senha;
+    string nomePessoa;
+    string hexUsuario;
 public:
-    //Usuario();
-    Usuario(string _nome, string _senha) {
-        nome = _nome;
-        senha = _senha;
-    };
-    void setNome(string _nome){
-        nome = _nome;
-    }
-    void setSenha(string _senha){
-        senha = _senha;
-    }
-    string getNome() {
-        return nome;
-    }
-    string getSenha() {
-        return senha;
-    }
-
+    Usuario();
+    Usuario(string _nomeUsuario, string _senha, string _nomePessoa, string _hexUsuario);
+    void setNomeUsuario(string _nomeUsuario);
+    void setSenha(string _senha);
+    void setNomePessoa(string _nomePessoa);
+    void setHexUsuario(string _hex);
+    string getId();
+    string getNomeUsuario();
+    string getSenha();
+    string getNomePessoa();
+    string getHexUsuario();
 };

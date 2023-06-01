@@ -128,9 +128,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="chatPremium.cpp" />
+    <ClCompile Include="Grupo.cpp" />
+    <ClCompile Include="Libs.cpp" />
+    <ClCompile Include="Mensagem.cpp" />
+    <ClCompile Include="Usuario.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Libs.h" />
+    <ClInclude Include="Grupo.h" />
+    <ClInclude Include="Mensagem.h" />
     <ClInclude Include="Usuario.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
