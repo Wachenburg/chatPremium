@@ -5,16 +5,17 @@
 #include "Usuario.h";
 #include "Grupo.h";
 #include "Mensagem.h";
-
+#include "UsuarioGrupo.h";
 int main() {
-    string nomegrupo, mensagem, nomecontato;
+    string nomegrupo, msg, nomecontato;
     int op, tipo, qntdcontato, usuarioAtual, idGrupoEnvia;
     string nome, senha;
     
     vector <Usuario> usuario;
     vector <Grupo> grupo;
     vector <Mensagem> mensagem; 
-
+    vector <UsuarioGrupo> usuarioGrupo;
+    Mensagem tempMensagem;
     cout << "digite seu nome\n";
     cin >> nome;
     cout << "digite sua senha\n";
@@ -32,16 +33,20 @@ int main() {
                     cin >> nomegrupo;
                     for (int i = 0; i < grupo.size(); i++) {
                         if (grupo[i].getNomeGrupo() == nomegrupo) {
-                            Mensagem tempEnvia;
-                            tempEnvia.setIdPosta(usuarioAtual);
-                            tempEnvia.setIdGrupo(grupo[i].getIdGrupo());
-                            cout << "digite a mensagem a ser enviada\n";
-                            getline(cin, mensagem);
-                            cin.clear();
-                            cin.ignore();
-                            tempEnvia.setMensagem(mensagem);
-                            
-                            break;
+                            idGrupoEnvia = grupo[i].getIdGrupo();
+                            for (int y = 0; y < usuarioGrupo.size(); y++) {
+                                if (idGrupoEnvia == usuarioGrupo[y].getIdGrupo() && usuarioAtual == usuarioGrupo[y].getIdUsuario()) {
+                                    tempMensagem.setIdPosta(usuarioAtual);
+                                    tempMensagem.setIdGrupo(grupo[i].getIdGrupo());
+                                    cout << "digite a mensagem a ser enviada\n";
+                                    getline(cin, msg);
+                                    cin.clear();
+                                    cin.ignore();
+                                    tempMensagem.setMensagem(msg);
+                                    mensagem.push_back(tempMensagem);
+                                    break;
+                                }
+                            }
                         }
                     }
                     break;

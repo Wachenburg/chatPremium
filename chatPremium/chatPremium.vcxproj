@@ -132,6 +132,7 @@
     <ClCompile Include="Libs.cpp" />
     <ClCompile Include="Mensagem.cpp" />
     <ClCompile Include="Usuario.cpp" />
+    <ClCompile Include="UsuarioGrupo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Grupo.h" />
