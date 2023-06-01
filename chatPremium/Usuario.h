@@ -15,7 +15,7 @@ public:
     void setSenha(string _senha);
     void setNomePessoa(string _nomePessoa);
     void setHexUsuario(string _hex);
-    string getId();
+    int getId();
     string getNomeUsuario();
     string getSenha();
     string getNomePessoa();

@@ -20,9 +20,25 @@ void Usuario::setNomeUsuario(string _nomeUsuario) {
 void Usuario::setSenha(string _senha) {
 	this->senha = _senha;
 }
+void Usuario::setNomePessoa(string _nomePessoa) {
+	this->nomePessoa = _nomePessoa;
+}
+void Usuario::setHexUsuario(string _hexUsuario) {
+	this->hexUsuario = _hexUsuario;
+}
+int Usuario::getId() {
+	return this->id;
+}
 string Usuario::getNomeUsuario() {
 	return this->nomeUsuario;
 }
 string Usuario::getSenha() {
 	return this->senha;
 }
+string Usuario::getNomePessoa() {
+	return this->nomePessoa;
+}
+string Usuario::getHexUsuario() {
+	return this->hexUsuario;
+}
+

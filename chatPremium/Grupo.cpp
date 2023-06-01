@@ -33,3 +33,4 @@ string Grupo::getGrupoSecret() {
 int Grupo::getTipoGrupo() {
 	return this->tipoGrupo;
 }
+

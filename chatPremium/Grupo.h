@@ -18,5 +18,4 @@ public:
 	string getNomeGrupo();
 	string getGrupoSecret();
 	int getTipoGrupo();
-
 };

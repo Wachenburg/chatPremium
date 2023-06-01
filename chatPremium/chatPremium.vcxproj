@@ -137,6 +137,7 @@
     <ClInclude Include="Grupo.h" />
     <ClInclude Include="Mensagem.h" />
     <ClInclude Include="Usuario.h" />
+    <ClInclude Include="UsuarioGrupo.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

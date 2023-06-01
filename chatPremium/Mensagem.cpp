@@ -46,3 +46,4 @@ string Mensagem::getMensagem()
 {
 	return this->mensagem;
 }
+
