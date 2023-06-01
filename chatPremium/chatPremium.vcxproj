@@ -133,12 +133,14 @@
     <ClCompile Include="Mensagem.cpp" />
     <ClCompile Include="Usuario.cpp" />
     <ClCompile Include="UsuarioGrupo.cpp" />
+    <ClCompile Include="UsuarioGrupoMensagem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Grupo.h" />
     <ClInclude Include="Mensagem.h" />
     <ClInclude Include="Usuario.h" />
     <ClInclude Include="UsuarioGrupo.h" />
+    <ClInclude Include="UsuarioGrupoMensagem.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
