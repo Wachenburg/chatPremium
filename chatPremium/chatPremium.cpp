@@ -48,6 +48,9 @@ int main() {
                 }
                 case 2: {
                     //fazer um "do while" para listar todos os grupos que o usuario logado
+                    for (int i = 0; i < grupo.size(); i++) {
+                        cout << grupo[i].getNomeGrupo() << endl;
+                    }
                     break;
                 }
                 case 3: {
@@ -66,12 +69,14 @@ int main() {
                         for (int i = 0; i < qntdcontato; i++) {
                             cout << "digite o contato\n";
                             cin >> nomecontato;
+                            
                             //chamado para o banco
                         }
                     }
                     break;
                 }
                 case 4: {
+
                     break;
                 }
                 case 5: {
