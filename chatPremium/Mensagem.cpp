@@ -2,14 +2,20 @@
 
 Mensagem::Mensagem()
 {
+	this->idMensagem = 0;
 	this->idPosta = 0;
 	this->idGrupo = 0;
 	this->mensagem = "";
 }
-Mensagem::Mensagem(int _idPosta, int _idGrupo, string _mensagem) {
+Mensagem::Mensagem(int _idMensagem,int _idPosta, int _idGrupo, string _mensagem) {
+	this->idMensagem = _idMensagem;
 	this->idPosta = _idPosta;
 	this->idGrupo = _idGrupo;
 	this->mensagem = _mensagem;
+}
+
+void Mensagem::setIdMensagem(int _idMensagem) {
+	this->idMensagem = _idMensagem;
 }
 
 void Mensagem::setIdPosta(int _idPosta)

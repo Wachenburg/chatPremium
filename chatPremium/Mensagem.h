@@ -9,7 +9,8 @@ private:
 	string mensagem;
 public:
 	Mensagem();
-	Mensagem(int _idPosta, int _idGrupo, string _mensagem);
+	Mensagem(int _idMensagem,int _idPosta, int _idGrupo, string _mensagem);
+	void setIdMensagem(int _idMensagem);
 	void setIdPosta(int _idPosta);
 	void setIdGrupo(int _idGrupo);
 	void setMensagem(string mensagem);

@@ -2,16 +2,21 @@
 
 Usuario::Usuario()
 {
+	this->idUsuario = 0;
 	this->nomeUsuario = "";
 	this->senha = "";
 	this->nomePessoa = "";
 	this->hexUsuario = "";
 }
-Usuario::Usuario(string _nomeUsuario, string _senha, string _nomePessoa, string _hexUsuario) {
+Usuario::Usuario(int _idUsuario, string _nomeUsuario, string _senha, string _nomePessoa, string _hexUsuario) {
+	this->idUsuario = _idUsuario;
 	this->nomeUsuario = _nomeUsuario;
 	this->senha = _senha;
 	this->nomePessoa = _nomePessoa;
 	this->hexUsuario = _hexUsuario;
+}
+void Usuario::setIdUsuario(int _idUsuario) {
+	this->idUsuario = _idUsuario;
 }
 
 void Usuario::setNomeUsuario(string _nomeUsuario) {
@@ -26,8 +31,8 @@ void Usuario::setNomePessoa(string _nomePessoa) {
 void Usuario::setHexUsuario(string _hexUsuario) {
 	this->hexUsuario = _hexUsuario;
 }
-int Usuario::getId() {
-	return this->id;
+int Usuario::getIdUsuario() {
+	return this->idUsuario;
 }
 string Usuario::getNomeUsuario() {
 	return this->nomeUsuario;

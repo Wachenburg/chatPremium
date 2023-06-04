@@ -2,15 +2,20 @@
 
 Grupo::Grupo()
 {
+	this->idGrupo = 0;
 	this->nomeGrupo = " ";
 	this->grupoSecret = " ";
 	this->tipoGrupo = 0;
 
 }
-Grupo::Grupo(string _nomeGrupo, string _grupoSecret, int _tipoGrupo) {
+Grupo::Grupo(int _idGrupo,string _nomeGrupo, string _grupoSecret, int _tipoGrupo) {
+	this->idGrupo = _idGrupo;
 	this->nomeGrupo = _nomeGrupo;
 	this->grupoSecret = _grupoSecret;
 	this->tipoGrupo = _tipoGrupo;
+}
+void Grupo::setIdGrupo(int _idGrupo) {
+	this->idGrupo = _idGrupo;
 }
 void Grupo::setNomeGrupo(string _nomeGrupo) {
 	this->nomeGrupo = _nomeGrupo;

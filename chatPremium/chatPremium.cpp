@@ -16,26 +16,69 @@ int main() {
     vector <Mensagem> mensagem; 
     vector <UsuarioGrupo> usuarioGrupo;
     Mensagem tempMensagem;
-    Usuario usuario1("bryan","1234","56");
-    Usuario usuario2("Lukas", "7653", "56");
-    Usuario usuario3("Felipe", "9032", "56");
-    Usuario usuario4("Rhuryan", "1234", "56");
-    Grupo grupo1("gangue de retardados", "std", 2);
-    Grupo grupo2("Grupo O Grupo", "cvh", 1);
-    Grupo grupo3("Só os Confirmados", "hgf", 2);
-    Grupo grupo1("Abecedario", "tyr", 1);
-    Mensagem tempMensagem1(765, 5, "Oi");
-    Mensagem tempMensagem2(135, 6, "caralho");
-    Mensagem tempMensagem3(475, 2, "porra");
-    Mensagem tempMensagem4(780, 9, "vai se fuder");
-    Mensagem tempMensagem5(253, 5, "toma no cu");
-    cout << "digite seu nome\n";
+    ////
+    Usuario usuario1(1,"user1", "1234", "bryan", "56");
+    usuario.push_back(usuario1);
+    Usuario usuario2(2,"user2", "7653", "Lukas", "56");
+    usuario.push_back(usuario2);
+    Usuario usuario3(3,"user3",  "9032", "Felipe", "56");
+    usuario.push_back(usuario3);
+    Usuario usuario4(4,"user4",  "1234", "Rhuryan", "56");
+    usuario.push_back(usuario4);
+    ////
+    Grupo grupo1(1,"gangue de retardados", "std", 2);
+    grupo.push_back(grupo1);
+    Grupo grupo2(2,"Grupo O Grupo", "cvh", 1);
+    grupo.push_back(grupo2);
+    Grupo grupo3(3,"So os Confirmados", "hgf", 2);
+    grupo.push_back(grupo3);
+    Grupo grupo4(4,"Abecedario", "tyr", 1);
+    grupo.push_back(grupo4);
+    ////
+    UsuarioGrupo usergroup1(1,1);
+    usuarioGrupo.push_back(usergroup1);
+    UsuarioGrupo usergroup2(2, 1);
+    usuarioGrupo.push_back(usergroup2);
+    UsuarioGrupo usergroup3(3, 1);
+    usuarioGrupo.push_back(usergroup3);
+    UsuarioGrupo usergroup4(1, 2);
+    usuarioGrupo.push_back(usergroup4);
+    UsuarioGrupo usergroup5(4, 2);
+    usuarioGrupo.push_back(usergroup5);
+    ////
+    Mensagem tempMensagem1(1,1, 1, "Oi");
+    mensagem.push_back(tempMensagem1);
+    Mensagem tempMensagem2(2,3, 1, "caralho");
+    mensagem.push_back(tempMensagem2);
+    Mensagem tempMensagem3(3,4, 2, "porra");
+    mensagem.push_back(tempMensagem3);
+    Mensagem tempMensagem4(4,2, 1, "vai se fuder");
+    mensagem.push_back(tempMensagem4);
+    Mensagem tempMensagem5(5,1, 2, "toma no cu");
+    mensagem.push_back(tempMensagem5);
+
+    for (Usuario iterador : usuario){
+        cout << iterador.getIdUsuario()<<" /// " << iterador.getNomeUsuario() << " /// " << iterador.getSenha() << " /// " << iterador.getNomePessoa() << " /// " << iterador.getHexUsuario() <<endl;
+    }
+    for (Grupo iterador : grupo) {
+        cout << iterador.getIdGrupo() << " /// " << iterador.getNomeGrupo() << " /// " << iterador.getGrupoSecret() << " /// " << iterador.getTipoGrupo() << endl;
+    }
+    for (UsuarioGrupo iterador : usuarioGrupo) {
+        cout << iterador.getIdUsuario() << " /// " << iterador.getIdGrupo() << endl;
+    }
+    for (Mensagem iterador : mensagem) {
+        cout << iterador.getIdMensagem() << " /// " << iterador.getIdPosta() << " /// " << iterador.getIdGrupo() << " /// " << iterador.getMensagem()<<endl;
+    }
+
+
+
+    cout << "digite seu nome de usuario\n";
     cin >> nome;
     cout << "digite sua senha\n";
     cin >> senha;
     for (int i = 0; i < usuario.size(); i++) {
         if (usuario[i].getNomeUsuario() == nome && usuario[i].getSenha() == senha) {
-            usuarioAtual = usuario[i].getId();
+            usuarioAtual = usuario[i].getIdUsuario();
             
             do {
                 cout << "digita uma opcao mano";
@@ -94,7 +137,7 @@ int main() {
                                 grupoPush.setTipoGrupo(tipo);
                                 grupoPush.setGrupoSecret("asokaoksoakoaksoskaoksaosk");
                                 grupo.push_back(grupoPush);
-                                usuarioGrupoPush.setIdUsuario(usuario[i].getId());
+                                usuarioGrupoPush.setIdUsuario(usuario[i].getIdUsuario());
                                 usuarioGrupo.push_back(usuarioGrupoPush);
                                 usuarioGrupoPush.setIdUsuario(usuarioAtual);
                                 usuarioGrupo.push_back(usuarioGrupoPush);
@@ -116,7 +159,7 @@ int main() {
                             cout << "digite o contato\n";
                             cin >> nomecontato;
                             if (usuario[i].getNomeUsuario() == nomecontato) {
-                                usuarioGrupoPush.setIdGrupo(usuario[i].getId());
+                                usuarioGrupoPush.setIdGrupo(usuario[i].getIdUsuario());
                                 usuarioGrupo.push_back(usuarioGrupoPush);
                             }
                             
