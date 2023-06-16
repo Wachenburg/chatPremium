@@ -17,6 +17,8 @@ int main() {
     vector <UsuarioGrupo> usuarioGrupo;
     Mensagem tempMensagem;
     ////
+    Usuario deleted(0, "DELETED", "2@40*1!", "DELETED", "FFFFFF");
+    usuario.push_back(deleted);
     Usuario usuario1(1, "user1", "1234", "bryan", "56");
     usuario.push_back(usuario1);
     Usuario usuario2(2, "user2", "7653", "Lukas", "56");
@@ -26,7 +28,7 @@ int main() {
     Usuario usuario4(4, "user4", "1234", "Rhuryan", "56");
     usuario.push_back(usuario4);
     ////
-    Grupo grupo1(1, "gangue de retardados", "std", 2);
+    Grupo grupo1(1, "teste", "std", 2);
     grupo.push_back(grupo1);
     Grupo grupo2(2, "Grupo O Grupo", "cvh", 1);
     grupo.push_back(grupo2);
@@ -187,25 +189,62 @@ int main() {
                             break;
                         }
                         case 5: {
+                            string grupoLista, usuarioPosta;
+                            int grupoIdTemp, usuarioPostaId;
+                            cout << "Digite o grupo para listar as mensagens: ";
+                            cin >> grupoLista;
+
+                            for (int i = 0; i < grupo.size(); i++) {
+                                if (strcmp(grupo[i].getNomeGrupo().c_str(), grupoLista.c_str()) == 0) {
+                                    grupoIdTemp = grupo[i].getIdGrupo();
+                                    for (int z = 0; z < usuarioGrupo.size(); z++) {
+                                        if (grupoIdTemp == usuarioGrupo[z].getIdGrupo() && usuarioAtual == usuarioGrupo[z].getIdUsuario()) {
+                                            for (int j = 0; j < mensagem.size(); j++) {
+                                                if (mensagem[j].getIdGrupo() == grupoIdTemp) {
+                                                    usuarioPostaId = mensagem[j].getIdPosta();
+                                                    for (int p = 0; p < usuario.size(); p++) {
+                                                        if (usuario[p].getIdUsuario() == usuarioPostaId) {
+                                                            usuarioPosta = usuario[p].getNomeUsuario();
+                                                            break;
+                                                        }
+
+                                                    }
+                                                    cout << usuarioPosta << ": " << mensagem[j].getMensagem() << "." << endl;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            break;
+                        }
+                        case 6: {
                             string escolheApagar;
                             cout << "Voce deseja mesmo apagar sua conta? sim ou nao?";
                             cin >> escolheApagar;
                             if (strcmp(escolheApagar.c_str(), "sim") == 0) {
+                                for (int i = 0; i < usuarioGrupo.size(); i++) {
+                                    if (usuarioGrupo[i].getIdUsuario() == usuarioAtual) {
+                                        usuarioGrupo[i].setIdUsuario(0);
+                                    }
+                                }
+                                for (UsuarioGrupo teste : usuarioGrupo) {
+                                    cout << teste.getIdGrupo() << " /// " << teste.getIdUsuario() << endl;
+                                }
+                                for (int i = 0; i < mensagem.size(); i++) {
+                                    if (mensagem[i].getIdPosta() == usuarioAtual) {
+                                        mensagem[i].setIdPosta(0); 
+                                    }
+                                }
+                                for (Mensagem teste : mensagem) {
+                                    cout << teste.getIdPosta() << endl;
+                                }
                                 for (int i = 0; i < usuario.size(); i++) {
                                     if (usuario[i].getIdUsuario() == usuarioAtual) {
                                         usuario.erase(usuario.begin() + i);
                                         break;
                                     }
-                                    for (int i = 0; i < usuarioGrupo.size(); i++) {
-                                        if (usuarioGrupo[i].getIdUsuario() == usuarioAtual) {
-                                            usuarioGrupo.erase(usuarioGrupo.begin() + i);
-                                        }
-                                    }
-                                    for (int i = 0; i < mensagem.size(); i++) {
-                                        if (mensagem[i].getIdPosta() == usuarioAtual) {
-                                            mensagem.erase(mensagem.begin() + i);
-                                        }
-                                    }
+                                    
                                 }
                             }
                             opConta = 7;
@@ -214,18 +253,13 @@ int main() {
                             }*/
                             break;
                         }
-                        case 6: {
-                            string grupoLista;
-                            cout << "";
-                            cin >> grupoLista;
-                            //fazer for, preencher um novo array de mensagens apenas com as mensagem relacionadas ao grupo em questao e publicar na tela depois
-                            //for()
-                            break;
-                        }
+                       
                         case 7: {
+                            cout << "Saindo..." << endl;
                             break;
                         }
                         default: {
+                            cout << "Opcao invalida." << endl;
                             break;
                         }
                         }

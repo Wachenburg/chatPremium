@@ -20,7 +20,7 @@ void Mensagem::setIdMensagem(int _idMensagem) {
 
 void Mensagem::setIdPosta(int _idPosta)
 {
-	this->idPosta = idPosta;
+	this->idPosta = _idPosta;
 }
 
 void Mensagem::setIdGrupo(int _idGrupo)
