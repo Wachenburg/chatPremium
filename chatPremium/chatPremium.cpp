@@ -6,6 +6,7 @@
 #include "Grupo.h";
 #include "Mensagem.h";
 #include "UsuarioGrupo.h";
+
 int main() {
     string nomegrupo, msg, nomecontato;
     int opLogin, opConta, tipo, qntdcontato, usuarioAtual, idGrupoEnvia;
@@ -28,7 +29,7 @@ int main() {
     Usuario usuario4(4, "user4", "1234", "Rhuryan", "56");
     usuario.push_back(usuario4);
     ////
-    Grupo grupo1(1, "teste", "std", 2);
+    Grupo grupo1(1, "teste getline", "std", 2);
     grupo.push_back(grupo1);
     Grupo grupo2(2, "Grupo O Grupo", "cvh", 1);
     grupo.push_back(grupo2);
@@ -73,28 +74,42 @@ int main() {
     }
 
     do {
-        cout << "1 login, 2 cadastrar, 3 esqueci a senha, 4 encerrar";
+        cout << "1 login, 2 cadastrar, 3 esqueci a senha, 4 encerrar"<<endl;
         cin >> opLogin;
+        cin.ignore();
         switch (opLogin) {
 
         case 1: {
             cout << "digite seu nome de usuario\n";
             cin >> nome;
+            cin.ignore();
             cout << "digite sua senha\n";
             cin >> senha;
+            cin.ignore();
             for (int i = 0; i < usuario.size(); i++) {
                 if (usuario[i].getNomeUsuario() == nome && usuario[i].getSenha() == senha) {
                     usuarioAtual = usuario[i].getIdUsuario();
 
                     do {
-                        cout << "digita uma opcao mano";
+                        cout << "Selecione uma opcao: "<<endl;
+                        cout << "1 - Enviar Mensagem" << endl;
+                        cout << "2 - Listar Grupos"<<endl;
+                        cout << "3 - Criar Contato/Grupo"<<endl;
+                        cout << "4 - Entrar em Grupo" << endl;
+                        cout << "5 - Listar Mensagens" << endl;
+                        cout << "6 - Excluir Conta" << endl;
+                        cout << "7 - Editar Dados da Conta" << endl;
+                        cout << "8 - Fazer Logoff" << endl;
                         cin >> opConta;
+                        cin.ignore();
                         switch (opConta) {
                         case 1: {
                             cout << "Qual o contato/grupo que voce vai enviar a mensagem\n";
-                            cin >> nomegrupo;
+                            getline(cin, nomegrupo);
+                            cin.clear();
+                            //cin >> nomegrupo;
                             for (int i = 0; i < grupo.size(); i++) {
-                                if (grupo[i].getNomeGrupo() == nomegrupo) {
+                                if (strcmp(grupo[i].getNomeGrupo().c_str(),nomegrupo.c_str())==0) {
                                     idGrupoEnvia = grupo[i].getIdGrupo();
                                     for (int y = 0; y < usuarioGrupo.size(); y++) {
                                         if (idGrupoEnvia == usuarioGrupo[y].getIdGrupo() && usuarioAtual == usuarioGrupo[y].getIdUsuario()) {
@@ -103,7 +118,6 @@ int main() {
                                             cout << "digite a mensagem a ser enviada\n";
                                             getline(cin, msg);
                                             cin.clear();
-                                            cin.ignore();
                                             tempMensagem.setMensagem(msg);
                                             mensagem.push_back(tempMensagem);
                                             break;
@@ -133,10 +147,12 @@ int main() {
                             do {
                                 cout << "Selecione o tipo de grupo, 1 para grupo simples e 2 para grupo com varias pessoas\n";
                                 cin >> tipo;
+                                cin.ignore();
                             } while (tipo != 1 && tipo != 2);
                             if (tipo == 1) {
                                 cout << "digite o nome do contato\n";
                                 cin >> nomecontato; // adicionar concatenacao com o nome da pessoa que esta criando o contato
+                                cin.ignore();
                                 for (int i = 0; i < usuario.size(); i++) {
                                     if (usuario[i].getNomeUsuario() == nomecontato) {
                                         grupoPush.setNomeGrupo(nomecontato);
@@ -153,7 +169,9 @@ int main() {
                             }if (tipo == 2) {
                                 grupoPush.setTipoGrupo(tipo);
                                 cout << "digite o nome do grupo\n";
-                                cin >> nomegrupo;
+                                getline(cin, nomegrupo);
+                                cin.clear();
+                                //cin >> nomegrupo;
                                 grupoPush.setNomeGrupo(nomegrupo);
                                 cout << "digite quantos contatos deseja adicionar\n";
                                 cin >> qntdcontato;
@@ -177,9 +195,11 @@ int main() {
                         case 4: {
                             UsuarioGrupo usuarioGrupoPush;
                             cout << "Digite o grupo para entrar: ";
-                            cin >> nomegrupo;
+                            getline(cin, nomegrupo);
+                            cin.clear();
+                            //cin >> nomegrupo;
                             for (int i = 0; i < grupo.size(); i++) {
-                                if (grupo[i].getNomeGrupo() == nomegrupo && grupo[i].getTipoGrupo() == 2) {
+                                if (strcmp(grupo[i].getNomeGrupo().c_str(),nomegrupo.c_str())==0 && grupo[i].getTipoGrupo() == 2) {
                                     usuarioGrupoPush.setIdGrupo(grupo[i].getIdGrupo());
                                     usuarioGrupoPush.setIdUsuario(usuarioAtual);
                                     usuarioGrupo.push_back(usuarioGrupoPush);
@@ -192,7 +212,9 @@ int main() {
                             string grupoLista, usuarioPosta;
                             int grupoIdTemp, usuarioPostaId;
                             cout << "Digite o grupo para listar as mensagens: ";
-                            cin >> grupoLista;
+                            getline(cin, grupoLista);
+                            cin.clear();
+                            //cin >> grupoLista;
 
                             for (int i = 0; i < grupo.size(); i++) {
                                 if (strcmp(grupo[i].getNomeGrupo().c_str(), grupoLista.c_str()) == 0) {
@@ -247,14 +269,115 @@ int main() {
                                     
                                 }
                             }
-                            opConta = 7;
+                            opConta = 8;
                             /*for (Usuario iterador : usuario) {
                             cout << iterador.getIdUsuario() << " /// " << iterador.getNomeUsuario() << " /// " << iterador.getSenha() << " /// " << iterador.getNomePessoa() << " /// " << iterador.getHexUsuario() << endl;
                             }*/
                             break;
                         }
-                       
                         case 7: {
+                            Usuario edita;
+                            int opEdita = 0, continuarEditando;
+                            for (int i = 0; i < usuario.size(); i++) {
+                                if (usuario[i].getIdUsuario() == usuarioAtual) {
+                                    edita.setNomeUsuario(usuario[i].getNomeUsuario());
+                                    edita.setSenha(usuario[i].getSenha());
+                                    edita.setNomePessoa(usuario[i].getNomePessoa());
+                                    edita.setHexUsuario(usuario[i].getHexUsuario());
+                                    do {
+                                        cout << "Digite qual a informacao a alterar: " << endl;
+                                        cout << "1 - Nome de Usuario" << endl;
+                                        cout << "2 - Senha" << endl;
+                                        cout << "3 - Nome" << endl;
+                                        cout << "4 - Hexadecimal" << endl;
+                                        cout << "5 - Cancelar" << endl;
+                                        cin >> opEdita;
+                                        switch (opEdita) {
+                                        case 1: {
+                                            string novoNomeUsuario;
+                                            cout << "Digite seu novo nome de usuario: ";
+                                            cin >> novoNomeUsuario;
+                                            edita.setNomeUsuario(novoNomeUsuario);
+                                            cout << "Editar mais itens? 1 - nao\nOutros inputs - sim" << endl;
+                                            cin >> continuarEditando;
+                                            if (continuarEditando != 1) {
+                                                opEdita = 0;
+                                            }
+                                            else {
+                                                opEdita = 5;
+                                            }
+                                            break;
+                                        }
+                                        case 2: {
+                                            string comparaSenha, senhaNova;
+                                            do {
+                                                cout << "Digite sua nova senha: ";
+                                                cin >> senhaNova;
+                                                cout << "Repita a nova senha: ";
+                                                cin >> comparaSenha;
+                                                if (strcmp(comparaSenha.c_str(), senhaNova.c_str()) != 0) {
+                                                    cout << "Senhas nao coincidem."<<endl;
+                                                }
+                                            } while (strcmp(comparaSenha.c_str(), senhaNova.c_str()) != 0);
+                                            edita.setSenha(senhaNova);
+                                            cout << "Editar mais itens? 1 - nao\nOutros inputs - sim" << endl;
+                                            cin >> continuarEditando;
+                                            if (continuarEditando != 1) {
+                                                opEdita = 0;
+                                            }
+                                            else {
+                                                opEdita = 5;
+                                            }
+                                            break;
+                                        }
+                                        case 3: {
+                                            string novoNome;
+                                            cout << "Digite o novo nome: ";
+                                            cin >> novoNome;
+                                            edita.setNomePessoa(novoNome);
+                                            cout << "Editar mais itens? 1 - nao\nOutros inputs - sim" << endl;
+                                            cin >> continuarEditando;
+                                            if (continuarEditando != 1) {
+                                                opEdita = 0;
+                                            }
+                                            else {
+                                                opEdita = 5;
+                                            }
+                                            break;
+                                        }
+                                        case 4: {
+                                            string novoHex;
+                                            cout << "Digite o novo hexadeciml: ";
+                                            cin >> novoHex;
+                                            edita.setHexUsuario(novoHex);
+                                            cout << "Editar mais itens? 1 - nao\nOutros inputs - sim" << endl;
+                                            cin >> continuarEditando;
+                                            if (continuarEditando != 1) {
+                                                opEdita = 0;
+                                            }
+                                            else {
+                                                opEdita = 5;
+                                            }
+                                            break;
+                                        }
+                                        case 5: {
+                                            usuario[i].setNomeUsuario(edita.getNomeUsuario());
+                                            usuario[i].setSenha(edita.getSenha());
+                                            usuario[i].setNomePessoa(edita.getNomePessoa());
+                                            usuario[i].setHexUsuario(edita.getHexUsuario());
+                                            break;
+                                        }
+                                        default: {
+                                            cout << "Opcao invalida." << endl;
+                                            break;
+                                        }
+                                        }
+                                    } while (opEdita != 5);
+                                }
+                            }
+                            break;
+                        }
+                        case 8: {
                             cout << "Saindo..." << endl;
                             break;
                         }
@@ -263,7 +386,7 @@ int main() {
                             break;
                         }
                         }
-                    } while (opConta != 7);
+                    } while (opConta != 8);
                 }
             }
             break;
