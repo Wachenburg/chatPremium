@@ -14,10 +14,10 @@ int main() {
     string nome, senha;
     Criptografador criptografador;
 
-    string teste = criptografador.criptografa("teste de troca");
-    cout << teste<<endl;
-    teste = criptografador.decriptografa(teste);
-    cout << teste;
+    //string teste = criptografador.criptografa("teste de troca");
+    //cout << teste<<endl;
+    //teste = criptografador.decriptografa(teste);
+    //cout << teste;
     vector <Usuario> usuario;
     vector <Grupo> grupo;
     vector <Mensagem> mensagem;
@@ -55,15 +55,15 @@ int main() {
     UsuarioGrupo usergroup5(4, 2);
     usuarioGrupo.push_back(usergroup5);
     ////
-    Mensagem tempMensagem1(1, 1, 1, "Oi");
+    Mensagem tempMensagem1(1, 1, 1, criptografador.criptografa("Oi"));
     mensagem.push_back(tempMensagem1);
-    Mensagem tempMensagem2(2, 3, 1, "caralho");
+    Mensagem tempMensagem2(2, 3, 1, criptografador.criptografa("Caramba"));
     mensagem.push_back(tempMensagem2);
-    Mensagem tempMensagem3(3, 4, 2, "porra");
+    Mensagem tempMensagem3(3, 4, 2, criptografador.criptografa("que loucura"));
     mensagem.push_back(tempMensagem3);
-    Mensagem tempMensagem4(4, 2, 1, "vai se fuder");
+    Mensagem tempMensagem4(4, 2, 1, criptografador.criptografa("oi?"));
     mensagem.push_back(tempMensagem4);
-    Mensagem tempMensagem5(5, 1, 2, "toma no cu");
+    Mensagem tempMensagem5(5, 1, 2, criptografador.criptografa("que isso cara"));
     mensagem.push_back(tempMensagem5);
 
     for (Usuario iterador : usuario) {
@@ -124,7 +124,8 @@ int main() {
                                             cout << "digite a mensagem a ser enviada\n";
                                             getline(cin, msg);
                                             cin.clear();
-                                            tempMensagem.setMensagem(msg);
+                                            string enviaCriptografia = criptografador.criptografa(msg);
+                                            tempMensagem.setMensagem(enviaCriptografia);
                                             mensagem.push_back(tempMensagem);
                                             break;
                                         }
@@ -237,7 +238,7 @@ int main() {
                                                         }
 
                                                     }
-                                                    cout << usuarioPosta << ": " << mensagem[j].getMensagem() << "." << endl;
+                                                    cout << usuarioPosta << ": " << criptografador.decriptografa(mensagem[j].getMensagem()) << "." << endl;
                                                 }
                                             }
                                         }
