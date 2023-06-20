@@ -6,12 +6,18 @@
 #include "Grupo.h";
 #include "Mensagem.h";
 #include "UsuarioGrupo.h";
+#include "Criptografador.h";
 
 int main() {
     string nomegrupo, msg, nomecontato;
     int opLogin, opConta, tipo, qntdcontato, usuarioAtual, idGrupoEnvia;
     string nome, senha;
+    Criptografador criptografador;
 
+    string teste = criptografador.criptografa("teste de troca");
+    cout << teste<<endl;
+    teste = criptografador.decriptografa(teste);
+    cout << teste;
     vector <Usuario> usuario;
     vector <Grupo> grupo;
     vector <Mensagem> mensagem;
