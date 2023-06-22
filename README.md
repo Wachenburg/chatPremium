@@ -3,10 +3,3 @@ This is a project made in a group of four for our first semester college C++ cla
 
 The idea for this project is to create a message platform with JWT encoding, integrated mainly with a database and also some config files.
 
--Current task:
-  *Create and test all the needed classes
--What we want to add: 
-  *Integrate JWT for c++
-  *Add a language option (portuguese, and english, maybe german)
-  *Fast login (get username from last logged user)
-  *Graphic interface + light and Dark mode
