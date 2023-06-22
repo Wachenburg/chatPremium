@@ -1,5 +1,8 @@
 #include "Criptografador.h"
-
+/*
+    Esta classe e a responsavel atual por criptografar mensagens. Ela altera valores de string pelo metodo zenit polar (troca de caracteres).
+    No futuro, a intencao e trocar este metodo por um jwt
+*/
 string Criptografador::criptografa(string _texto)
 {
     //zenit

@@ -9,20 +9,22 @@
 #include "Criptografador.h";
 
 int main() {
-    string nomegrupo, msg, nomecontato;
+    string nomegrupo, msg, nomecontato, senhaSuperSecretaAdm = "SENHaSUPErSECRETa";
     int opLogin, opConta, tipo, qntdcontato, usuarioAtual, idGrupoEnvia;
     string nome, senha;
     Criptografador criptografador;
 
-    //string teste = criptografador.criptografa("teste de troca");
-    //cout << teste<<endl;
-    //teste = criptografador.decriptografa(teste);
-    //cout << teste;
     vector <Usuario> usuario;
     vector <Grupo> grupo;
     vector <Mensagem> mensagem;
     vector <UsuarioGrupo> usuarioGrupo;
     Mensagem tempMensagem;
+
+    /*
+    Nas linhas abaixo, estamos preenchendo nossos vetores com algumas informaoes de exemplo. Esta parte será mantida no código até que um banco de dados ou
+    arquivo para mantermos os dados. 
+    */
+
     ////
     Usuario deleted(0, "DELETED", "2@40*1!", "DELETED", "FFFFFF");
     usuario.push_back(deleted);
@@ -35,7 +37,7 @@ int main() {
     Usuario usuario4(4, "user4", "1234", "Rhuryan", "56");
     usuario.push_back(usuario4);
     ////
-    Grupo grupo1(1, "teste getline", "std", 2);
+    Grupo grupo1(1, "testandooow owo", "std", 2);
     grupo.push_back(grupo1);
     Grupo grupo2(2, "Grupo O Grupo", "cvh", 1);
     grupo.push_back(grupo2);
@@ -66,26 +68,22 @@ int main() {
     Mensagem tempMensagem5(5, 1, 2, criptografador.criptografa("que isso cara"));
     mensagem.push_back(tempMensagem5);
 
-    for (Usuario iterador : usuario) {
-        cout << iterador.getIdUsuario() << " /// " << iterador.getNomeUsuario() << " /// " << iterador.getSenha() << " /// " << iterador.getNomePessoa() << " /// " << iterador.getHexUsuario() << endl;
-    }
-    for (Grupo iterador : grupo) {
-        cout << iterador.getIdGrupo() << " /// " << iterador.getNomeGrupo() << " /// " << iterador.getGrupoSecret() << " /// " << iterador.getTipoGrupo() << endl;
-    }
-    for (UsuarioGrupo iterador : usuarioGrupo) {
-        cout << iterador.getIdUsuario() << " /// " << iterador.getIdGrupo() << endl;
-    }
-    for (Mensagem iterador : mensagem) {
-        cout << iterador.getIdMensagem() << " /// " << iterador.getIdPosta() << " /// " << iterador.getIdGrupo() << " /// " << iterador.getMensagem() << endl;
-    }
+    
 
     do {
+        /*
+            Este do-while seria a tela inicial do app. aqui seria onde o usuario teria a opcao de entrar na sua conta, recuperar sua senha ou criar seu usuario.
+            Tambem existe uma opcao ****extremamente secreta**** para fazer debugging
+        */
         cout << "1 login, 2 cadastrar, 3 esqueci a senha, 4 encerrar"<<endl;
         cin >> opLogin;
         cin.ignore();
         switch (opLogin) {
 
         case 1: {
+            /*
+            Aqui ocorre o fluxo principal do programa, onde o usuario tem acesso a todas as opcoes disponiveis para ele.
+            */
             cout << "digite seu nome de usuario\n";
             cin >> nome;
             cin.ignore();
@@ -110,6 +108,10 @@ int main() {
                         cin.ignore();
                         switch (opConta) {
                         case 1: {
+                            /*
+                            Aqui faremos os envios de mensagens. O usuario precisa definir para quem ela sera enviada e a mensagem em si. A mensagem sera
+                            criptografada antes de ser salva no vetor.
+                            */
                             cout << "Qual o contato/grupo que voce vai enviar a mensagem\n";
                             getline(cin, nomegrupo);
                             cin.clear();
@@ -135,22 +137,32 @@ int main() {
                             break;
                         }
                         case 2: {
-                            //fazer um "do while" para listar todos os grupos que o usuario logado
+                            /*
+                            Aqui listaremos todos os grupos que o usuario atual faz parte. Por grupo, definimos que podera ser considerado como um contato
+                            ou como um grupo. Mais sobre isso a frente.
+                            */
                             for (int i = 0; i < usuarioGrupo.size(); i++) {
                                 if (usuarioAtual == usuarioGrupo[i].getIdUsuario()) {
-                                    for (int y = 0; y < grupo.size(); y++) {
-                                        if (grupo[y].getIdGrupo() == usuarioGrupo[i].getIdGrupo()) {
-                                            cout << grupo[y].getNomeGrupo() << endl;
-                                        }
-                                    }
+                                            for (int y = 0; y < grupo.size(); y++) {
+                                                if (grupo[y].getIdGrupo() == usuarioGrupo[i].getIdGrupo()) {
+                                                    cout << grupo[y].getNomeGrupo() << endl;
+                                                }
+                                            }   
                                 }
 
                             }
                             break;
                         }
                         case 3: {
+                            /*
+                            Nesta parte criamos os grupos, para onde serao enviadas as mensagens. Os grupos sao contatos ou grupos. Um contato sera classificado
+                            como tipo 1. Isto define que apenas 2 pessoas participam deste grupo, nao podendo adicionar novas pessoas. Um grupo, classificado
+                            como tipo 2, podera conter N contatos.
+                            */
                             Grupo grupoPush;
                             UsuarioGrupo usuarioGrupoPush;
+                            int idGrupo;
+                            bool idViavel;
                             do {
                                 cout << "Selecione o tipo de grupo, 1 para grupo simples e 2 para grupo com varias pessoas\n";
                                 cin >> tipo;
@@ -158,22 +170,46 @@ int main() {
                             } while (tipo != 1 && tipo != 2);
                             if (tipo == 1) {
                                 cout << "digite o nome do contato\n";
-                                cin >> nomecontato; // adicionar concatenacao com o nome da pessoa que esta criando o contato
+                                cin >> nomecontato; 
                                 cin.ignore();
                                 for (int i = 0; i < usuario.size(); i++) {
                                     if (usuario[i].getNomeUsuario() == nomecontato) {
+                                        do {
+                                            srand(time(NULL));
+                                            idViavel = true;
+                                            idGrupo = rand() % 10000;
+                                            for (int k = 0; k < grupo.size(); k++) {
+                                                if (grupo[k].getIdGrupo() == idGrupo) {
+                                                    idViavel = false;
+                                                }
+                                            }
+                                        } while (idViavel != true);
+                                        grupoPush.setIdGrupo(idGrupo);
                                         grupoPush.setNomeGrupo(nomecontato);
                                         grupoPush.setTipoGrupo(tipo);
                                         grupoPush.setGrupoSecret("asokaoksoakoaksoskaoksaosk");
                                         grupo.push_back(grupoPush);
                                         usuarioGrupoPush.setIdUsuario(usuario[i].getIdUsuario());
+                                        usuarioGrupoPush.setIdGrupo(idGrupo);
                                         usuarioGrupo.push_back(usuarioGrupoPush);
                                         usuarioGrupoPush.setIdUsuario(usuarioAtual);
+                                        usuarioGrupoPush.setIdGrupo(idGrupo);
                                         usuarioGrupo.push_back(usuarioGrupoPush);
 
                                     }
                                 }
                             }if (tipo == 2) {
+                                do {
+                                    srand(time(NULL));
+                                    idViavel = true;
+                                    idGrupo = rand() % 10000;
+                                    for (int k = 0; k < grupo.size(); k++) {
+                                        if (grupo[k].getIdGrupo() == idGrupo) {
+                                            idViavel = false;
+                                        }
+                                    }
+                                } while (idViavel != true);
+                                grupoPush.setIdGrupo(idGrupo);
                                 grupoPush.setTipoGrupo(tipo);
                                 cout << "digite o nome do grupo\n";
                                 getline(cin, nomegrupo);
@@ -184,22 +220,27 @@ int main() {
                                 cin >> qntdcontato;
                                 grupoPush.setGrupoSecret("asokaoksoakoaksoskaoksaosk");
                                 grupo.push_back(grupoPush);
+                                usuarioGrupoPush.setIdGrupo(idGrupo);
                                 usuarioGrupoPush.setIdUsuario(usuarioAtual);
                                 usuarioGrupo.push_back(usuarioGrupoPush);
-                                for (int i = 0; i < qntdcontato; i++) {
+                                for (int p = 0; p < qntdcontato; p++) {
                                     cout << "digite o contato\n";
                                     cin >> nomecontato;
-                                    if (usuario[i].getNomeUsuario() == nomecontato) {
-                                        usuarioGrupoPush.setIdGrupo(usuario[i].getIdUsuario());
-                                        usuarioGrupo.push_back(usuarioGrupoPush);
+                                    for (int t = 0; t < usuario.size(); t++) {
+                                        if (strcmp(usuario[t].getNomeUsuario().c_str(), nomecontato.c_str()) == 0) {
+                                            usuarioGrupoPush.setIdGrupo(idGrupo);
+                                            usuarioGrupoPush.setIdUsuario(usuario[t].getIdUsuario());
+                                            usuarioGrupo.push_back(usuarioGrupoPush);
+                                        }
                                     }
-
-                                    //chamado para o banco
                                 }
                             }
                             break;
                         }
                         case 4: {
+                            /*
+                            Aqui o usuario pode entrar em algum grupo ja existente. O programa ira validar se este grupo e do tipo 2, permitindo sua entrada
+                            */
                             UsuarioGrupo usuarioGrupoPush;
                             cout << "Digite o grupo para entrar: ";
                             getline(cin, nomegrupo);
@@ -216,6 +257,9 @@ int main() {
                             break;
                         }
                         case 5: {
+                            /*
+                            Esta parte lista as mensagens do grupo especificado pelo usuario, na ordem em que foram enviadas.
+                            */
                             string grupoLista, usuarioPosta;
                             int grupoIdTemp, usuarioPostaId;
                             cout << "Digite o grupo para listar as mensagens: ";
@@ -248,6 +292,10 @@ int main() {
                             break;
                         }
                         case 6: {
+                            /*
+                            Esta parte permite o usuario excluir a sua conta. Apos a exclusao, o programa sera levado para fora da area do usuario e devolta 
+                            para a tela de login.
+                            */
                             string escolheApagar;
                             cout << "Voce deseja mesmo apagar sua conta? sim ou nao?";
                             cin >> escolheApagar;
@@ -283,6 +331,10 @@ int main() {
                             break;
                         }
                         case 7: {
+                            /*
+                            Aqui o usuario pode editar algumas informacoes da sua conta. Nao e fornecida uma opcao para editar o seu ID, pois o plano e 
+                            futuramente integrar com o banco de dados e utilizar uma chave primaria auto-incrementavel para definir os ID's.
+                            */
                             Usuario edita;
                             int opEdita = 0, continuarEditando;
                             for (int i = 0; i < usuario.size(); i++) {
@@ -292,6 +344,9 @@ int main() {
                                     edita.setNomePessoa(usuario[i].getNomePessoa());
                                     edita.setHexUsuario(usuario[i].getHexUsuario());
                                     do {
+                                        /*
+                                        Dentro deste loop, o usuario pode escolher alterar varios dados, um dado ou o mesmo dado varias vezes.
+                                        */
                                         cout << "Digite qual a informacao a alterar: " << endl;
                                         cout << "1 - Nome de Usuario" << endl;
                                         cout << "2 - Senha" << endl;
@@ -385,10 +440,14 @@ int main() {
                             break;
                         }
                         case 8: {
+                            /*
+                            Aqui voltamos para nossa tela inicial, permitindo um novo login ser realizado.
+                            */
                             cout << "Saindo..." << endl;
                             break;
                         }
                         default: {
+                            //Default para casos de input incorreto
                             cout << "Opcao invalida." << endl;
                             break;
                         }
@@ -399,6 +458,10 @@ int main() {
             break;
         }
         case 2: {
+            /*
+                Nesta aba podemos cadastrar um novo usuario. Como ainda nao temos uma ligacao com um banco, possuimos um input do ID, mas validamos se ele ja
+                existe para outro usuario antes de permitir sua insercao, assim nao tendo uma conta duplicata.
+            */
             Usuario cadastro;
             int verificaId, idTemp;
             string nomeUsuarioTemp, senhaTemp, nomeRealTemp, hexTemp;
@@ -434,6 +497,10 @@ int main() {
             break;
         }
         case 3: {
+            /*
+                Funcao de recuperacao de senha. O usuario devera lembrar alguns parametros de seguranca para poder recuperar sua conta, como o ID dele, que apenas
+                ele tem acesso.
+            */
             int idRecupera;
             string nomeUsuarioRecupera;
             cout << "Nome da conta: ";
@@ -445,6 +512,46 @@ int main() {
                     cout << "A sua senha e "<<senhaRecupera.getSenha();
                     break;
                 }
+            }
+            break;
+        }
+        case 4: {
+            /*
+            Fechamos o app
+            */
+            cout << "Encerrando app...";
+            break;
+        }
+        default: {
+            //Caso default, para o caso de um input incorreto
+            cout << "Opcao invalida." << endl;
+        }
+        case 12022000: {
+            /*
+            Ferramenta de debugging. Aqui listamos tudo que temos cadastrado nos nossos vetores (ja que atualmente nao temos um banco).
+            */
+            string senhaComparaAdm;
+            cout << "..." << endl;
+            cin >> senhaComparaAdm;
+            if (strcmp(senhaComparaAdm.c_str(),senhaSuperSecretaAdm.c_str())==0) {
+                cout << "\n" << endl;
+                for (Usuario iterador : usuario) {
+                    cout << iterador.getIdUsuario() << " /// " << iterador.getNomeUsuario() << " /// " << iterador.getSenha() << " /// " << iterador.getNomePessoa() << " /// " << iterador.getHexUsuario() << endl;
+                }
+                cout << "\n" << endl;
+                for (Grupo iterador : grupo) {
+                    cout << iterador.getIdGrupo() << " /// " << iterador.getNomeGrupo() << " /// " << iterador.getGrupoSecret() << " /// " << iterador.getTipoGrupo() << endl;
+                }
+                cout << "\n" << endl;
+                for (UsuarioGrupo iterador : usuarioGrupo) {
+                    cout << iterador.getIdUsuario() << " /// " << iterador.getIdGrupo() << endl;
+                }
+                cout << "\n" << endl;
+                for (Mensagem iterador : mensagem) {
+                    cout << iterador.getIdMensagem() << " /// " << iterador.getIdPosta() << " /// " << iterador.getIdGrupo() << " /// " << iterador.getMensagem() << endl;
+                }
+                cout << "\n" << endl;
+                break;
             }
             break;
         }
